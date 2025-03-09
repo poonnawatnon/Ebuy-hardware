@@ -1,0 +1,91 @@
+Directory Structure for: D:\CPE334_Project\Ebuy\backend
+Generated on: 26/11/2024, 7:43:26 pm
+==================================================
+
+├── .env
+├── .gitignore
+├── dist
+│   ├── config
+│   │   └── database.js
+│   ├── controllers
+│   │   ├── authController.js
+│   │   ├── cartController.js
+│   │   ├── productController.js
+│   │   ├── profile.js
+│   │   └── userController.js
+│   ├── index.js
+│   ├── middleware
+│   │   ├── auth.js
+│   │   ├── error.js
+│   │   └── validation.js
+│   ├── models
+│   │   └── index.js
+│   ├── routes
+│   │   ├── auth.js
+│   │   ├── cart.js
+│   │   ├── products.js
+│   │   ├── profile.js
+│   │   └── users.js
+│   ├── services
+│   │   └── email.js
+│   ├── types
+│   │   ├── auth.js
+│   │   └── product.js
+│   └── utils
+│       ├── jwt.js
+│       └── validation.js
+├── nodemon.json
+├── package-lock.json
+├── package.json
+├── prisma
+│   ├── migrations
+│   │   ├── 20241120113012_init
+│   │   │   └── migration.sql
+│   │   ├── 20241123091709_add_product_quantity
+│   │   │   └── migration.sql
+│   │   ├── 20241124075153_add_subcategory_field
+│   │   │   └── migration.sql
+│   │   ├── 20241125175351_add_addresses
+│   │   │   └── migration.sql
+│   │   ├── 20241126043443_fixed_order
+│   │   │   └── migration.sql
+│   │   └── migration_lock.toml
+│   └── schema.prisma
+├── src
+│   ├── config
+│   │   └── database.ts
+│   ├── controllers
+│   │   ├── addressController.ts
+│   │   ├── authController.ts
+│   │   ├── cartController.ts
+│   │   ├── checkoutController.ts
+│   │   ├── orderController.ts
+│   │   ├── productController.ts
+│   │   ├── profile.ts
+│   │   └── userController.ts
+│   ├── index.ts
+│   ├── middleware
+│   │   ├── auth.ts
+│   │   ├── error.ts
+│   │   └── validation.ts
+│   ├── models
+│   │   └── index.ts
+│   ├── routes
+│   │   ├── addresses.ts
+│   │   ├── auth.ts
+│   │   ├── cart.ts
+│   │   ├── checkout.ts
+│   │   ├── orders.ts
+│   │   ├── products.ts
+│   │   ├── profile.ts
+│   │   └── users.ts
+│   ├── services
+│   │   └── email.ts
+│   ├── types
+│   │   ├── auth.ts
+│   │   └── product.ts
+│   └── utils
+│       ├── email.ts
+│       ├── jwt.ts
+│       └── validation.ts
+└── tsconfig.json

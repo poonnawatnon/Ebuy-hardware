@@ -1,0 +1,145 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String    @id @default(uuid())
+  email            String    @unique
+  password         String
+  username         String    @unique
+  role             String    @default("user")
+  bio              String?
+  createdAt        DateTime  @default(now())
+  products         Product[] // Changed from listings to products
+  cart             Cart?
+  buyerOrders      Order[]   @relation("Buyer")
+  sellerOrders     Order[]   @relation("Seller")
+  sentMessages     Message[] @relation("MessageSender")
+  receivedMessages Message[] @relation("MessageReceiver")
+  addresses        ShippingAddress[]
+  //reviews        Review[]   // Reviews written by the user
+}
+
+model Product {
+  id          String      @id @default(uuid())
+  title       String
+  description String?
+  price       Decimal
+  condition   String @default("NEW")
+  category    String // Complete PC, Graphics Card, CPU, etc.
+  subcategory String? // Optional subcategory
+  images      String[] // URLs of product images
+  specs       Json? // Technical specifications (optional)
+  status      String      @default("ACTIVE") // ACTIVE, SOLD, RESERVED
+  featured    Boolean     @default(false)
+  views       Int         @default(0)        // Track product views
+  seller      User        @relation(fields: [sellerId], references: [id])
+  sellerId    String
+  cartItems   CartItem[]
+  orderItems  OrderItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  quantity    Int         @default(1)
+
+  @@index([category])
+  @@index([subcategory])
+  @@index([status])
+  @@index([featured])
+}
+
+model Cart {
+  id        String     @id @default(uuid())
+  user      User       @relation(fields: [userId], references: [id])
+  userId    String     @unique // One cart per user
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model CartItem {
+  id        String   @id @default(uuid())
+  cart      Cart     @relation(fields: [cartId], references: [id])
+  cartId    String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([cartId, productId]) // Prevent duplicate products in cart
+}
+
+model Order {
+  id              String      @id @default(uuid())
+  buyer           User        @relation("Buyer", fields: [buyerId], references: [id])
+  buyerId         String
+  seller          User        @relation("Seller", fields: [sellerId], references: [id])
+  sellerId        String
+  items           OrderItem[]
+  status          OrderStatus @default(PENDING)  // Keep this one and remove the other status field
+  totalAmount     Decimal
+  shippingAddress Json
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  order     Order    @relation(fields: [orderId], references: [id])
+  orderId   String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int
+  price     Decimal // Price at time of purchase
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Message {
+  id         String   @id @default(uuid())
+  sender     User     @relation("MessageSender", fields: [senderId], references: [id])
+  senderId   String
+  receiver   User     @relation("MessageReceiver", fields: [receiverId], references: [id])
+  receiverId String
+  content    String
+  read       Boolean  @default(false)
+  createdAt  DateTime @default(now())
+}
+
+model ShippingAddress {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  fullName  String
+  address1  String
+  address2  String?
+  city      String
+  state     String
+  zipCode   String
+  country   String
+  phone     String?
+  isDefault Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}

@@ -1,0 +1,84 @@
+Directory Structure for: D:\CPE334_Project\Ebuy\frontend
+Generated on: 26/11/2024, 7:43:17 pm
+==================================================
+
+├── .env.local
+├── .gitignore
+├── next-env.d.ts
+├── next.config.js
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── public
+│   └── images
+│       ├── AMD-Logo.png
+│       ├── intel-logo.png
+│       ├── Nvidia-logo.png
+│       └── RADEON-Logo.png
+├── src
+│   ├── components
+│   │   ├── forms
+│   │   ├── layout
+│   │   │   ├── Layout.tsx
+│   │   │   └── Navbar.tsx
+│   │   ├── products
+│   │   │   ├── ProductCard.tsx
+│   │   │   ├── ProductFilters.tsx
+│   │   │   ├── ProductGrid.tsx
+│   │   │   └── ProductList.tsx
+│   │   └── profile
+│   │       ├── ProfileCard.tsx
+│   │       └── ProfileForm.tsx
+│   ├── context
+│   │   ├── AuthContext.tsx
+│   │   └── CartContext.tsx
+│   ├── hooks
+│   │   └── useAuth.ts
+│   ├── index.ts
+│   ├── pages
+│   │   ├── cart.tsx
+│   │   ├── checkout.tsx
+│   │   ├── index.tsx
+│   │   ├── login.tsx
+│   │   ├── orders
+│   │   │   ├── index.tsx
+│   │   │   └── [id].tsx
+│   │   ├── products
+│   │   │   ├── accessories.tsx
+│   │   │   ├── components.tsx
+│   │   │   ├── cpus.tsx
+│   │   │   ├── gpus.tsx
+│   │   │   ├── index.tsx
+│   │   │   ├── other-systems.tsx
+│   │   │   ├── pcs.tsx
+│   │   │   ├── peripherals.tsx
+│   │   │   └── [id].tsx
+│   │   ├── profile
+│   │   │   ├── edit.tsx
+│   │   │   └── index.tsx
+│   │   ├── register.tsx
+│   │   ├── sell
+│   │   │   ├── edit
+│   │   │   │   └── [id].tsx
+│   │   │   ├── index.tsx
+│   │   │   ├── listings.tsx
+│   │   │   ├── orders
+│   │   │   │   └── [id].tsx
+│   │   │   └── orders.tsx
+│   │   └── _app.tsx
+│   ├── services
+│   │   └── api.ts
+│   ├── styles
+│   │   └── globals.css
+│   ├── types
+│   │   ├── auth.ts
+│   │   ├── index.ts
+│   │   ├── order.ts
+│   │   └── product.ts
+│   └── utils
+│       ├── api.ts
+│       ├── auth.ts
+│       ├── format.ts
+│       └── toast.ts
+├── tailwind.config.ts
+└── tsconfig.json
